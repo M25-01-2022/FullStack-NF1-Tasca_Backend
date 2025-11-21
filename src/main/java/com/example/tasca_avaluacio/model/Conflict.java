@@ -2,21 +2,22 @@ package com.example.tasca_avaluacio.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table (name = "conflicts")
 public class Conflict {
-    private enum stat{ACTIVE,FROZEN,ENDED}
+    private enum status{ACTIVE,FROZEN,ENDED}
 
     //Datos de la tabla
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
     private String name;
     private LocalDate startDate = LocalDate.now();
     @Enumerated(EnumType.STRING)
-    private stat status; //ACTIVE, FROZEN, ENDED
+    private status status; //ACTIVE, FROZEN, ENDED
     @Lob
     private String description;
 
@@ -27,17 +28,11 @@ public class Conflict {
             joinColumns = @JoinColumn(name = "conflict_id"),
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
-    private Country countries;
+    private List<Country> countries;
 
-    public Country getCountries() {
-        return countries;
-    }
+    public Conflict(){}
 
-    public void setConflict(Country country) {
-        this.countries = country;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -45,19 +40,27 @@ public class Conflict {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public LocalDate getStartDate() {
         return startDate;
     }
 
-    public stat getStatus() {
+    public status getStatus() {
         return status;
     }
 
-    public void setStatus(stat status) {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Country> getCountries() {
+        return countries;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStatus(status status) {
         this.status = status;
     }
 
@@ -65,7 +68,7 @@ public class Conflict {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setConflict(List<Country> country) {
+        this.countries = country;
     }
 }

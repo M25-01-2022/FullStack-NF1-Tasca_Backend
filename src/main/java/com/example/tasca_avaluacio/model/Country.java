@@ -8,48 +8,16 @@ public class Country {
 
     //Datos de la tabla
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(name = "country", nullable = false)
-    private String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(nullable = false)
+    private String name;
+    @Column(nullable = false, length = 5)
     private String code;
 
-    //Relacion de un pais con muchos conflictos
-     @OneToMany(
-             mappedBy = "country",
-             cascade = CascadeType.ALL,
-             orphanRemoval = true,
-             fetch = FetchType.LAZY
-     )
-     List<Conflict> conflicts;
 
-     public void addConflict(Conflict conflict){
-         conflicts.add(conflict);
-         conflict.setConflict(this);
-     }
-
-     //Relacion de un pais con muchos aliados
-    @OneToMany(
-            mappedBy = "country",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
-     @JoinTable(name = "support_countries",
-             joinColumns = @JoinColumn(name = "conflict_id"),
-             inverseJoinColumns = @JoinColumn(name = "country_id")
-     )
-     List<Faction> factions;
-
-     public void addFactions(Faction faction){
-         factions.add(faction);
-         faction.setFaction(this);
-     }
-
-    protected Country() {}
-    public Country(long id, String name, String code) {
-        this.id = id;
+    public Country() {}
+    public Country(String name, String code) {
         this.name = name;
         this.code = code;
     }
