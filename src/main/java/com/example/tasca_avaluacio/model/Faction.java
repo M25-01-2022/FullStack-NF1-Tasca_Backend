@@ -28,9 +28,11 @@ public class Faction {
             joinColumns = @JoinColumn(name = "faction_id"),
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
-    private List<Country> countries;
+    private List<Country> countries = new ArrayList<>();
 
-    public Faction(){}
+    public Faction(){
+        this.countries = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;

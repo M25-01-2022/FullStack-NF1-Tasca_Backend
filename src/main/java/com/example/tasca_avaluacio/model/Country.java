@@ -1,8 +1,10 @@
 package com.example.tasca_avaluacio.model;
 
 import jakarta.persistence.*;
+
 import java.util.*;
 
+@Entity
 @Table(name="countries")
 public class Country {
 
@@ -10,11 +12,12 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, length = 5)
     private String code;
 
+
+    @ManyToMany(mappedBy = "countries")
+    private List<Conflict> conflicts = new ArrayList<>();
 
     public Country() {}
     public Country(String name, String code) {
@@ -24,7 +27,7 @@ public class Country {
 
     @Override
     public String toString(){
-        return String.format("Country[id=%d, name='%s', code='%s]",
+        return String.format("Country[id=%d, name='%s', code='%s']",
                 id, name, code);
     }
 
@@ -46,5 +49,12 @@ public class Country {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public List<Conflict> getConflicts() {
+        return conflicts;
+    }
+    public void setConflicts(List<Conflict> conflicts) {
+        this.conflicts = conflicts;
     }
 }

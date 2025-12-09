@@ -2,22 +2,23 @@ package com.example.tasca_avaluacio.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table (name = "conflicts")
 public class Conflict {
-    private enum status{ACTIVE,FROZEN,ENDED}
+
+    public enum Status {ACTIVE,FROZEN,ENDED}
 
     //Datos de la tabla
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
     private String name;
-    private LocalDate startDate = LocalDate.now();
+    private LocalDate startDate;
     @Enumerated(EnumType.STRING)
-    private status status; //ACTIVE, FROZEN, ENDED
+    private Status status; //ACTIVE, FROZEN, ENDED
     @Lob
     private String description;
 
@@ -28,7 +29,7 @@ public class Conflict {
             joinColumns = @JoinColumn(name = "conflict_id"),
             inverseJoinColumns = @JoinColumn(name = "country_id")
     )
-    private List<Country> countries;
+    private List<Country> countries = new ArrayList<>();
 
     public Conflict(){}
 
@@ -40,13 +41,30 @@ public class Conflict {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDate getStartDate() {
         return startDate;
     }
 
-    public status getStatus() {
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public Status getStatus() {
         return status;
     }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
 
     public void setDescription(String description) {
         this.description = description;
@@ -56,19 +74,7 @@ public class Conflict {
         return countries;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStatus(status status) {
-        this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setConflict(List<Country> country) {
-        this.countries = country;
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
     }
 }

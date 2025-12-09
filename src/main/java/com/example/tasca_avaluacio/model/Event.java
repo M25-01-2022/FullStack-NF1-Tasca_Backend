@@ -1,7 +1,6 @@
 package com.example.tasca_avaluacio.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
