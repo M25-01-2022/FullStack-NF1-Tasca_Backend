@@ -33,12 +33,26 @@ Compilar i executar
 
    mvn spring-boot:run
 
-   (La aplicació s'executarà a https://localhost:8080)
+   (La aplicació s'executarà com https://localhost:8080)
    
-5. Com accedir a la base de dades H2?:
+4. Com accedir a la base de dades H2?:
+
    URL: http://localhost:8080/h2-console
+
    JDBC URL: jdbc:h2:mem:testdb
+
    User: dam
+
    Password: (deixar en blanc)
 
-   
+---
+
+Exemples d'us dels endpoints principals amb Bruno (https://www.usebruno.com/)
+
+Amb GET http://localhost:8080/api/v1/conflicts
+
+<img width="1912" height="952" alt="image" src="https://github.com/user-attachments/assets/056a4f01-058a-44f8-ac3c-2032eb130c12" />
+
+Y amb Post http://localhost:8080/api/v1/conflicts
+
+<img width="1906" height="947" alt="image" src="https://github.com/user-attachments/assets/ff60086e-d591-4339-98b3-67367a4a0b03" />
