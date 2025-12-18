@@ -17,6 +17,7 @@ public class ConflictController {
         this.conflictService = conflictService;
     }
 
+    // Da todos los conflictos
     @GetMapping
     public List<ConflictDTO> getAll(@RequestParam(required = false) String status) {
         if (status != null) {
@@ -27,21 +28,25 @@ public class ConflictController {
         return conflictService.getAllConflicts();
     }
 
+    // Regresa un conflicto específico por su ID
     @GetMapping("/{id}")
     public ConflictDTO getById(@PathVariable Long id) {
         return conflictService.getConflictById(id);
     }
 
+    // Crea un nuevo conflicto usando DTO de creación
     @PostMapping
     public ConflictDTO create(@RequestBody CreateConflictDTO dto) {
         return conflictService.createConflict(dto);
     }
 
+    // Actualiza un conflicto existente por ID usando DTO de creación
     @PutMapping("/{id}")
     public ConflictDTO update(@PathVariable Long id, @RequestBody CreateConflictDTO dto) {
         return conflictService.updateConflict(id, dto);
     }
 
+    // Elimina un conflicto por su ID
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         conflictService.deleteConflict(id);

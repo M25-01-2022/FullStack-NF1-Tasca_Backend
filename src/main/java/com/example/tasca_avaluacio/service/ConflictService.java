@@ -22,6 +22,8 @@ public class ConflictService {
         this.conflictRepository = conflictRepository;
         this.countryRepository = countryRepository;
     }
+
+    // Convierte todos los conflictos de la BD a DTO y retorna la lista
     public List<ConflictDTO> getAllConflicts() {
         return conflictRepository.findAll()
                 .stream()
@@ -29,12 +31,14 @@ public class ConflictService {
                 .collect(Collectors.toList());
     }
 
+    // Retorna un conflicto específico convertido a DTO y lanza error si no existe
     public ConflictDTO getConflictById(Long id) {
         return conflictRepository.findById(id)
                 .map(this::convertToDTO)
                 .orElseThrow(() -> new RuntimeException("Conflict not found"));
     }
 
+    // Crea un conflicto nuevo, asigna países y lo guarda en BD
     @Transactional
     public ConflictDTO createConflict(CreateConflictDTO dto) {
         Conflict conflict = new Conflict();
@@ -50,6 +54,7 @@ public class ConflictService {
         return convertToDTO(saved);
     }
 
+    // Actualiza un conflicto existente y sus países
     @Transactional
     public ConflictDTO updateConflict(Long id, CreateConflictDTO dto) {
         Conflict conflict = conflictRepository.findById(id)
@@ -66,11 +71,13 @@ public class ConflictService {
         return convertToDTO(conflict);
     }
 
+    // Elimina un conflicto por ID
     @Transactional
     public void deleteConflict(Long id) {
         conflictRepository.deleteById(id);
     }
 
+    // Convierte una entidad Conflict a ConflictDTO para devolver por la API
     private ConflictDTO convertToDTO(Conflict conflict) {
         List<String> countryNames = conflict.getCountries()
                 .stream()
