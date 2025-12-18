@@ -49,10 +49,6 @@ Compilar i executar
 
 Exemples d'us dels endpoints principals amb Bruno (https://www.usebruno.com/)
 
-Amb GET http://localhost:8080/api/v1/conflicts
+https://github.com/user-attachments/assets/40b76c37-2991-4da3-9041-228b6d5ca6aa
 
-<img width="1912" height="952" alt="image" src="https://github.com/user-attachments/assets/056a4f01-058a-44f8-ac3c-2032eb130c12" />
 
-Y amb Post http://localhost:8080/api/v1/conflicts
-
-<img width="1906" height="947" alt="image" src="https://github.com/user-attachments/assets/ff60086e-d591-4339-98b3-67367a4a0b03" />
