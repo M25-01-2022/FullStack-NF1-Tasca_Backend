@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Conflictos</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<h1>Lista de Conflictos</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Fecha de Inicio</th>
+        <th>Estado</th>
+        <th>Descripción</th>
+        <th>Países</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="conflict : ${conflicts}">
+        <td th:text="${conflict.name}">Nombre</td>
+        <td th:text="${#temporals.format(conflict.startdate, 'dd/MM/yyyy')}"></td>
+        <td th:text="${conflict.status}">Estado</td>
+        <td th:text="${conflict.description}">Descripción</td>
+        <td th:text="${conflict.countries != null ? T(java.lang.String).join(', ', conflict.countries) : 'N/A'}">Países</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
